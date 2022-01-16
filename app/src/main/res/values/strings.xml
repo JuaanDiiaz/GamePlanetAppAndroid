@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">GamePlanet</string>
+    <string name="outConn">No se pudo establecer conexión a la red</string>
+    <string name="user">Usuario</string>
+    <string name="pass">Contraseña</string>
+    <string name="login">Ingresar</string>
+    <string name="logFail">Error al autenticarse</string>
+    <string name="addToCart">Agregar al carrito</string>
+    <string name="log_out">Cerrar sesion</string>
+    <string name="cart">Mi carrito</string>
+    <string name="register">Registrarme</string>
+    <string name="name">Nombre</string>
+    <string name="lastName">Apellido paterno</string>
+    <string name="surName">Apellido materno</string>
+    <string name="email">"Correo eléctronico "</string>
+    <string name="confirmPass">Confirmar contraseña</string>
+    <string name="cancelSale">Cancelar pedido</string>
+    <string name="idSale">Id del pedido</string>
+</resources>
