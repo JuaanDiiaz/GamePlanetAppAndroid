@@ -39,9 +39,15 @@ class CancelSaleActivity : AppCompatActivity() {
             !binding.editTextIdSale.text.isNullOrEmpty() &&
             !binding.editTextPasswordC.text.isNullOrEmpty())
         {
-            cancelSale()
+            if(Constants.checkEmail(binding.editTextUser.text.toString())){
+                cancelSale()
+            }else{
+                Toast.makeText(this,"Formato de correo invalido",
+                        Toast.LENGTH_LONG).show()
+            }
         }else{
-            Toast.makeText(this,"Favor de completar todos los datos",Toast.LENGTH_LONG).show()
+            Toast.makeText(this,"Favor de completar todos los datos",
+                    Toast.LENGTH_LONG).show()
         }
     }
     fun cancelSale(){

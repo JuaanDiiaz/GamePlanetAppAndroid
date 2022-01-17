@@ -9,18 +9,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.gameplanet.CartActivity
 import com.example.gameplanet.Data.CartDB
 import com.example.gameplanet.Data.Configurations
 import com.example.gameplanet.Entity.EntityCart
 import com.example.gameplanet.Entity.EntityProduct
 import com.example.gameplanet.R
 import com.example.gameplanet.Tools.Constants
+import com.example.gameplanet.databinding.ActivityCartBinding
 import com.example.gameplanet.databinding.ItemCartBinding
 import com.example.gameplanet.databinding.ItemHomeBinding
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
-class CartAdpter(val cartList:ArrayList<EntityCart>, val context: Context): RecyclerView.Adapter<CartHolder>() {
+class CartAdpter(val cartList:ArrayList<EntityCart>, val context: Context,val binding: ActivityCartBinding): RecyclerView.Adapter<CartHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartHolder {
         val inflater = LayoutInflater.from(parent.context)
         return CartHolder(inflater.inflate(R.layout.item_cart,parent,false))
@@ -47,11 +49,13 @@ class CartAdpter(val cartList:ArrayList<EntityCart>, val context: Context): Recy
         holder.textViewManufacturerProduct.text = cartList[position].product.productManufacturer
         holder.textViewProductName.text = cartList[position].product.productName
         holder.spinnerQuantity.setSelection(cartList[position].quantity-1)
+
         holder.buttonDeleteToCart.setOnClickListener {
             val dataBase = CartDB(context)
             dataBase.delete(cartList[position].id)
             cartList.removeAt(position)
             notifyDataSetChanged()
+            CartActivity.setCost(context,binding)
             myDialog().show()
         }
     }

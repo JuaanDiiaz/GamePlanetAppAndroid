@@ -1,13 +1,16 @@
 package com.example.gameplanet
 
-import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.gameplanet.Data.Login
 import com.example.gameplanet.Tools.Constants
+import com.example.gameplanet.Tools.NetworkConnectionState
 import com.example.gameplanet.databinding.ActivityLogInBinding
+import java.util.regex.Pattern
+
 
 class LogInActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLogInBinding
@@ -18,15 +21,26 @@ class LogInActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
+        val x = NetworkConnectionState(this)
         binding.buttonLogin.setOnClickListener {
-            if(binding.editTextEmail.text.isNotEmpty()
-                && binding.editTextPassword.text.isNotEmpty()){
-                val login = Login(this)
-                login.getIn(binding.editTextEmail.text.toString(),
-                    binding.editTextPassword.text.toString())
+            if(x.checkNetwork()){
+                if(binding.editTextEmail.text.isNotEmpty()
+                    && binding.editTextPassword.text.isNotEmpty()){
+                    if(Constants.checkEmail(binding.editTextEmail.text.toString())){
+                        val login = Login(this)
+                        login.getIn(binding.editTextEmail.text.toString(),
+                                binding.editTextPassword.text.toString())
+                    }else{
+                        Toast.makeText(this, "Formato de correo invalido",
+                                Toast.LENGTH_LONG).show()
+                    }
+                }else{
+                    Toast.makeText(this, "favor de ingresar los datos completos",
+                            Toast.LENGTH_LONG).show()
+                }
             }else{
-                Toast.makeText(this,"favor de ingresar los datos completos",
-                    Toast.LENGTH_LONG).show()
+                Toast.makeText(this, R.string.outConn,
+                        Toast.LENGTH_LONG).show()
             }
         }
         binding.buttonRegister.setOnClickListener {
@@ -35,4 +49,5 @@ class LogInActivity : AppCompatActivity() {
             finish()
         }
     }
+
 }

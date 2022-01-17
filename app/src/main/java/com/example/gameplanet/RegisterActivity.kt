@@ -14,6 +14,7 @@ import androidx.core.view.get
 import androidx.core.widget.doOnTextChanged
 import com.example.gameplanet.Data.Register
 import com.example.gameplanet.Entity.EntityCustomer
+import com.example.gameplanet.Tools.Constants
 import com.example.gameplanet.Tools.NetworkConnectionState
 import com.example.gameplanet.databinding.ActivityRegisterBinding
 import java.util.*
@@ -48,7 +49,8 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
             val year= myCalendar.get(Calendar.YEAR)
             val month= myCalendar.get(Calendar.MONTH)
             val day= myCalendar.get(Calendar.DAY_OF_MONTH)
-            val dpd = DatePickerDialog(this,android.R.style.Theme_Holo_Light_Dialog, DatePickerDialog.OnDateSetListener { view, y, m, d ->
+            val dpd = DatePickerDialog(this,android.R.style.Theme_Holo_Light_Dialog,
+                    DatePickerDialog.OnDateSetListener { view, y, m, d ->
                 binding.editTextDate.setText("$y-${twoDigits(m+1)}-${twoDigits(d)}")
             },year,month,day)
             dpd.show()
@@ -86,12 +88,17 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
         if(binding.editTextEmailC.text.isNullOrEmpty()){
             todoOk=false
             message+="Falta correo \n"
+        }else{
+            if(!Constants.checkEmail(binding.editTextEmailC.text.toString())){
+                todoOk=false
+                message+="Formato de correo invalido \n"
+            }
         }
-        if(binding.editTextPass1.text.isNullOrEmpty() || binding.editTextPass1.text.isNullOrEmpty()){
+        if(binding.editTextPass1.text.isNullOrEmpty() || binding.editTextPass2.text.isNullOrEmpty()){
             todoOk=false
             message+="Ingresar contraseña y confirmarla \n"
         }
-        if(binding.editTextPass1.text != binding.editTextPass1.text){
+        if(binding.editTextPass1.text.toString() != binding.editTextPass2.text.toString()){
             todoOk=false
             message+="Las contraseñas no coinciden \n"
         }
