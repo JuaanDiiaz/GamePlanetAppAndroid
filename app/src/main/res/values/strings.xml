@@ -16,4 +16,6 @@
     <string name="confirmPass">Confirmar contraseña</string>
     <string name="cancelSale">Cancelar pedido</string>
     <string name="idSale">Id del pedido</string>
+    <string name="delete">Eliminar</string>
+    <string name="buy">Comprar</string>
 </resources>

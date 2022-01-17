@@ -32,13 +32,16 @@ class Login(val context: Context) {
                     val x = Configurations(context)
                     x.save(Constants.user, email)
                     x.save(Constants.pass, pass)
+                    x.save(Constants.id_user, values.substring(0, 1))
 
                     Log.d(Constants.LOG_TAG, "val is $values")
+
                     Toast.makeText(
                         context,
                         "Bienvenido ${values.substring(2, values.length)}",
                         Toast.LENGTH_SHORT
                     ).show()
+
                     val i = Intent(context, HomeActivity::class.java).apply {
                         putExtra(Constants.id_user, values.substring(0, 1))
                     }
@@ -60,5 +63,6 @@ class Login(val context: Context) {
         val x=Configurations(context)
         x.save(Constants.user, "")
         x.save(Constants.pass, "")
+        x.save(Constants.id_user, "")
     }
 }

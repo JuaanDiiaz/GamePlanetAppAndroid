@@ -14,6 +14,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.gameplanet.Adapters.HomeAdapter
+import com.example.gameplanet.Data.CartDB
 import com.example.gameplanet.Data.Configurations
 import com.example.gameplanet.Data.Login
 import com.example.gameplanet.Entity.EntityProduct
@@ -101,7 +102,8 @@ class HomeActivity : AppCompatActivity() {
                 startActivity(i)
             }
             R.id.itmCart->{
-                Toast.makeText(this,"Activity en proceso", Toast.LENGTH_SHORT).show()
+                val i = Intent(this,CartActivity::class.java)
+                startActivity(i)
             }
         }
         return super.onOptionsItemSelected(item)
